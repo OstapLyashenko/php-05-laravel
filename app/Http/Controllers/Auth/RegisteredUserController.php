@@ -48,9 +48,9 @@ class RegisteredUserController extends Controller
 
     protected function retrieveUserFields(CreateUserRequest $request)
     {
-        $fields = $request->validated();
-        $fields['password'] = Hash::make($request->password);
-
-        return $fields;
+        return array_merge(
+            $request->validated(),
+            ['password' => Hash::make($request->password)]
+        );
     }
 }
